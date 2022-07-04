@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "945340012838",
+    "project_id": "practice-ecommerce-app",
+    "storage_bucket": "practice-ecommerce-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945340012838:android:85f8322945c6d6002709e7",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945340012838-7c2120d8b0diao5k1logtj0uafmjetb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK9PNLVOq_6xlY1V7J2UlEJpRQv9ksgvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945340012838-7c2120d8b0diao5k1logtj0uafmjetb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
