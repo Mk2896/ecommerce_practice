@@ -38,6 +38,8 @@ dependencies:
   firebase_auth: ^3.4.1
   cloud_firestore: ^3.2.1
   google_sign_in: ^5.3.3
+  carousel_slider: ^4.1.1
+  badges: ^2.0.3
 
 dev_dependencies:
   flutter_test:

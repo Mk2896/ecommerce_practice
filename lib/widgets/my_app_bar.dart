@@ -1,0 +1,40 @@
+import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/widgets/cart_icon.dart';
+import 'package:ecommerce_practice/widgets/custom_text.dart';
+import 'package:ecommerce_practice/widgets/profile_icon.dart';
+import 'package:flutter/material.dart';
+
+PreferredSizeWidget myAppBar({
+  String? screenTitle,
+  required BuildContext context,
+}) {
+  return AppBar(
+    centerTitle: Navigator.canPop(context),
+    automaticallyImplyLeading: false,
+    backgroundColor: const Color(secondaryColor),
+    leading: Navigator.canPop(context)
+        ? IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Color(primaryFontColor),
+            ),
+          )
+        : null,
+    title: screenTitle != null
+        ? CustomText(
+            text: screenTitle,
+            textColor: const Color(primaryFontColor),
+            textType: TextType.title,
+          )
+        : const CustomText(
+            text: "E-com App",
+            textColor: const Color(primaryColor),
+            textType: TextType.title,
+          ),
+    actions: [
+      const ProfileIcon(),
+      CartIcon(cartCount: "99+".toString()),
+    ],
+  );
+}

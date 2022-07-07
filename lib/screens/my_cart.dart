@@ -1,3 +1,4 @@
+import 'package:ecommerce_practice/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MyCart extends StatelessWidget {
@@ -5,6 +6,9 @@ class MyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => HomePage(),
+    ));
     return Center();
   }
 }

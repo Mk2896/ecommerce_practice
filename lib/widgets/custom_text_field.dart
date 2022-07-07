@@ -1,37 +1,31 @@
+import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
     this.autofocus,
+    this.topMargin,
     this.bottomMargin,
-    this.cursorColor,
-    this.cursorHeight,
-    this.cursorRadius,
-    this.cursorWidth,
     this.height,
     this.initialValue,
     this.isEnabled,
     this.isPassword,
     this.isReadonly,
     this.keyboardType,
-    this.leftMargin,
     this.maxLength,
     this.passwordChar,
-    this.rightMargin,
     this.textAlignment,
     this.textCapitalization,
     required this.textController,
     this.textDirection,
     this.textScrollController,
-    this.topMargin,
     this.validationMethod,
     this.width,
     this.prefix,
     this.suffix,
-    this.backgroundColor,
     this.errorText,
-    this.isFilled,
     this.labelPosition,
     this.labelStyle,
     this.helperText,
@@ -43,8 +37,6 @@ class CustomTextField extends StatelessWidget {
     this.topPadding,
   }) : super(key: key);
 
-  final double? leftMargin;
-  final double? rightMargin;
   final double? topMargin;
   final double? bottomMargin;
   final double? leftPadding;
@@ -56,10 +48,6 @@ class CustomTextField extends StatelessWidget {
   final bool? autofocus;
   final TextEditingController textController;
   final ScrollController? textScrollController;
-  final Color? cursorColor;
-  final double? cursorHeight;
-  final Radius? cursorRadius;
-  final double? cursorWidth;
   final bool? isReadonly;
   final bool? isEnabled;
   final String? initialValue;
@@ -74,8 +62,6 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefix;
   final Widget? suffix;
   final String? errorText;
-  final bool? isFilled;
-  final Color? backgroundColor;
   final FloatingLabelBehavior? labelStyle;
   final FloatingLabelAlignment? labelPosition;
   final String? helperText;
@@ -85,8 +71,6 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: leftMargin ?? 0,
-        right: rightMargin ?? 0,
         top: topMargin ?? 0,
         bottom: bottomMargin ?? 0,
       ),
@@ -101,41 +85,62 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         autofocus: autofocus ?? false,
         controller: textController,
-        cursorColor: cursorColor,
-        cursorHeight: cursorHeight,
-        cursorRadius: cursorRadius,
-        cursorWidth: cursorWidth ?? 2.0,
+        cursorColor: Colors.black,
+        cursorRadius: const Radius.circular(5),
         enabled: isEnabled,
+        readOnly: isReadonly ?? false,
         initialValue: initialValue,
         keyboardType: keyboardType,
         maxLength: maxLength,
         obscureText: isPassword ?? false,
         obscuringCharacter: passwordChar ?? "*",
-        readOnly: isReadonly ?? false,
         scrollController: textScrollController,
         textAlign: textAlignment ?? TextAlign.start,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         textDirection: textDirection,
         validator: validationMethod,
         decoration: InputDecoration(
-          // TODO: Setup border according to desired theme
-          // border:
-          // disabledBorder: ,
-          // enabledBorder: ,
-          // errorBorder: ,
-          // focusedBorder: ,
+          border: textFieldBorder(),
+          enabledBorder: textFieldBorder(),
+          disabledBorder: textFieldBorder(),
+          errorBorder: textFieldBorder(
+              noBorder: false, borderColor: const Color(errorColor)),
+          focusedBorder: textFieldBorder(
+              noBorder: false, borderColor: const Color(secondaryFontColor)),
           prefixIcon: prefix,
           suffixIcon: suffix,
           errorText: errorText,
-          filled: isFilled,
-          fillColor: backgroundColor,
+          filled: true,
+          fillColor: const Color(backgroundColor),
           floatingLabelBehavior: labelStyle,
           floatingLabelAlignment: labelPosition,
           helperText: helperText,
           hintText: hintText,
+          hintStyle: textStyle(
+              textColor: const Color(secondaryFontColor),
+              textType: TextType.boldText),
           labelText: labelText,
+          labelStyle: textStyle(
+              textColor: const Color(secondaryFontColor),
+              textType: TextType.text),
         ),
       ),
     );
   }
+}
+
+OutlineInputBorder textFieldBorder({
+  bool noBorder = true,
+  Color? borderColor,
+  double borderWidth = 1.0,
+}) {
+  assert(noBorder || borderColor != null,
+      "borderColor is required when noBorder is false");
+
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(20),
+    borderSide: noBorder
+        ? const BorderSide(style: BorderStyle.none)
+        : BorderSide(color: borderColor!, width: borderWidth),
+  );
 }
