@@ -29,7 +29,7 @@ PreferredSizeWidget myAppBar({
           )
         : const CustomText(
             text: "E-com App",
-            textColor: const Color(primaryColor),
+            textColor: Color(primaryColor),
             textType: TextType.title,
           ),
     actions: [
