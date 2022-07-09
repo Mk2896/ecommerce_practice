@@ -1,4 +1,5 @@
 import 'package:ecommerce_practice/screens/home_page.dart';
+import 'package:ecommerce_practice/screens/login.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'E-Commerce Demo',
-      home: HomePage(),
+      // home: HomePage(),
+      home: Login(),
     );
   }
 }

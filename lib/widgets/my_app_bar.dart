@@ -1,4 +1,5 @@
 import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/widgets/back_button.dart';
 import 'package:ecommerce_practice/widgets/cart_icon.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/profile_icon.dart';
@@ -12,15 +13,7 @@ PreferredSizeWidget myAppBar({
     centerTitle: Navigator.canPop(context),
     automaticallyImplyLeading: false,
     backgroundColor: const Color(secondaryColor),
-    leading: Navigator.canPop(context)
-        ? IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Color(primaryFontColor),
-            ),
-          )
-        : null,
+    leading: Navigator.canPop(context) ? backButton(context) : null,
     title: screenTitle != null
         ? CustomText(
             text: screenTitle,

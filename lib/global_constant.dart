@@ -8,11 +8,15 @@ const int successColor = 0XFF3A9B7A;
 const int primaryFontColor = 0XFF13181F;
 const int secondaryFontColor = 0XFF838589;
 
-// Screen Horizontal Padding
+// Screen Padding
 const double horizontalPadding = 20;
+const double verticalPadding = 15;
 
 // Border Radius
 const double radius = 15;
 
 // Product Card Height
 const double productCardHeight = 260;
+
+// Password Length
+const int passwordLength = 6;

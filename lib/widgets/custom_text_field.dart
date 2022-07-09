@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.isPassword,
     this.isReadonly,
     this.keyboardType,
+    this.textInputAction,
     this.maxLength,
     this.passwordChar,
     this.textAlignment,
@@ -52,6 +53,7 @@ class CustomTextField extends StatelessWidget {
   final bool? isEnabled;
   final String? initialValue;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final int? maxLength;
   final bool? isPassword;
   final String? passwordChar;
@@ -91,6 +93,7 @@ class CustomTextField extends StatelessWidget {
         readOnly: isReadonly ?? false,
         initialValue: initialValue,
         keyboardType: keyboardType,
+        textInputAction: textInputAction,
         maxLength: maxLength,
         obscureText: isPassword ?? false,
         obscuringCharacter: passwordChar ?? "*",
