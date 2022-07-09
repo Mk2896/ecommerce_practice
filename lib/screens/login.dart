@@ -48,114 +48,111 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.9,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 backButton(context),
-                Expanded(
-                  child: Form(
-                    key: _loginFormKey,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(horizontalPadding),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: verticalPadding),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                CustomText(
-                                  text: "Welcome back to\nE-COMM APP",
-                                  textColor: Color(primaryFontColor),
-                                  textType: TextType.heading1,
+                Form(
+                  key: _loginFormKey,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(horizontalPadding),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: verticalPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              CustomText(
+                                text: "Welcome back to\nE-COMM APP",
+                                textColor: Color(primaryFontColor),
+                                textType: TextType.heading1,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: verticalPadding),
+                                child: CustomText(
+                                  text: "Please enter data to login",
+                                  textColor: Color(secondaryFontColor),
+                                  textType: TextType.heading2,
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: verticalPadding),
-                                  child: CustomText(
-                                    text: "Please enter data to login",
-                                    textColor: Color(secondaryFontColor),
-                                    textType: TextType.heading2,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: verticalPadding),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const CustomText(
-                                  text: "Email Address",
-                                  textColor: Color(primaryFontColor),
-                                  textType: TextType.boldText,
-                                ),
-                                CustomTextField(
-                                  textController: _emailController,
-                                  labelText: "Enter Email Address",
-                                  topMargin: verticalPadding,
-                                  keyboardType: TextInputType.emailAddress,
-                                  textInputAction: TextInputAction.next,
-                                  validationMethod: _emailValidator,
-                                ),
-                              ],
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: verticalPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: "Email Address",
+                                textColor: Color(primaryFontColor),
+                                textType: TextType.boldText,
+                              ),
+                              CustomTextField(
+                                textController: _emailController,
+                                labelText: "Enter Email Address",
+                                topMargin: verticalPadding,
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                validationMethod: _emailValidator,
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: verticalPadding),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const CustomText(
-                                  text: "Password",
-                                  textColor: Color(primaryFontColor),
-                                  textType: TextType.boldText,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: verticalPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: "Password",
+                                textColor: Color(primaryFontColor),
+                                textType: TextType.boldText,
+                              ),
+                              CustomTextField(
+                                textController: _passwordController,
+                                labelText: "Enter Password",
+                                topMargin: verticalPadding,
+                                validationMethod: _passwordValidator,
+                                suffix: InkWell(
+                                  onTap: () => setState(() {
+                                    _showPassword = !_showPassword;
+                                  }),
+                                  child: _showPassword
+                                      ? const Icon(
+                                          Icons.visibility_off_outlined,
+                                          color: Color(secondaryFontColor),
+                                        )
+                                      : const Icon(
+                                          Icons.visibility_outlined,
+                                          color: Color(secondaryFontColor),
+                                        ),
                                 ),
-                                CustomTextField(
-                                  textController: _passwordController,
-                                  labelText: "Enter Password",
-                                  topMargin: verticalPadding,
-                                  validationMethod: _passwordValidator,
-                                  suffix: InkWell(
-                                    onTap: () => setState(() {
-                                      _showPassword = !_showPassword;
-                                    }),
-                                    child: _showPassword
-                                        ? const Icon(
-                                            Icons.visibility_off_outlined,
-                                            color: Color(secondaryFontColor),
-                                          )
-                                        : const Icon(
-                                            Icons.visibility_outlined,
-                                            color: Color(secondaryFontColor),
-                                          ),
-                                  ),
-                                  isPassword: !_showPassword,
-                                ),
-                              ],
-                            ),
+                                isPassword: !_showPassword,
+                              ),
+                            ],
                           ),
-                          CustomButton(
-                            buttonText: "Sign In",
-                            buttonMethod: _loginMethod,
-                            buttonType: ButtonType.primary,
-                            bottomMargin: verticalPadding,
-                            topMargin: verticalPadding,
-                          ),
-                        ],
-                      ),
+                        ),
+                        CustomButton(
+                          buttonText: "Sign In",
+                          buttonMethod: _loginMethod,
+                          buttonType: ButtonType.primary,
+                          bottomMargin: verticalPadding,
+                          topMargin: verticalPadding,
+                        ),
+                      ],
                     ),
                   ),
                 ),

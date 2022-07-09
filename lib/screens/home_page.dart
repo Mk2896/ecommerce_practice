@@ -6,7 +6,9 @@ import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/my_app_bar.dart';
 import 'package:ecommerce_practice/widgets/news_card.dart';
 import 'package:ecommerce_practice/widgets/product_card.dart';
+import 'package:ecommerce_practice/widgets/profile_icon.dart';
 import 'package:ecommerce_practice/widgets/search.dart';
+import 'package:ecommerce_practice/widgets/side_drawer.dart';
 import 'package:ecommerce_practice/widgets/title_see_all.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,7 @@ class HomePage extends StatelessWidget {
       appBar: myAppBar(
         context: context,
       ),
+      drawer: const SideDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

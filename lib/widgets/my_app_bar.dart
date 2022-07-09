@@ -26,7 +26,12 @@ PreferredSizeWidget myAppBar({
             textType: TextType.title,
           ),
     actions: [
-      const ProfileIcon(),
+      Builder(
+        builder: (context) => InkWell(
+          onTap: () => Scaffold.of(context).openDrawer(),
+          child: const ProfileIcon(),
+        ),
+      ),
       CartIcon(cartCount: "99+".toString()),
     ],
   );
