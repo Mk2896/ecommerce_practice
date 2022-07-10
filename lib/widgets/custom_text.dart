@@ -20,6 +20,7 @@ class CustomText extends StatelessWidget {
     this.letterSpacing,
     this.isItalic = false,
     this.textDecoration,
+    this.textAlignment,
   }) : super(key: key);
 
   final String text;
@@ -29,10 +30,12 @@ class CustomText extends StatelessWidget {
   final TextType textType;
   final bool isItalic;
   final TextDecoration? textDecoration;
+  final TextAlign? textAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Text(text,
+        textAlign: textAlignment,
         style: textStyle(
           textColor: textColor,
           textType: textType,

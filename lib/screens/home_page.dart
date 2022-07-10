@@ -1,12 +1,13 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/screens/blogs.dart';
 import 'package:ecommerce_practice/widgets/category_icon.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
-import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/my_app_bar.dart';
-import 'package:ecommerce_practice/widgets/news_card.dart';
+import 'package:ecommerce_practice/widgets/blogs_card.dart';
 import 'package:ecommerce_practice/widgets/product_card.dart';
-import 'package:ecommerce_practice/widgets/profile_icon.dart';
 import 'package:ecommerce_practice/widgets/search.dart';
 import 'package:ecommerce_practice/widgets/side_drawer.dart';
 import 'package:ecommerce_practice/widgets/title_see_all.dart';
@@ -16,6 +17,11 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final GlobalKey<FormState> searchFormKey = GlobalKey<FormState>();
+  final TextEditingController searchController = TextEditingController();
+
+  void _search() {
+    if (searchFormKey.currentState!.validate()) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,12 @@ class HomePage extends StatelessWidget {
               color: const Color(secondaryColor),
               child: Column(
                 children: [
-                  Search(searchFormKey: searchFormKey),
+                  Search(
+                    searchFormKey: searchFormKey,
+                    searchController: searchController,
+                    labelText: "Search Product Name",
+                    searchMethod: _search,
+                  ),
                   CarouselSlider(
                     options: CarouselOptions(
                       autoPlay: true,
@@ -192,7 +203,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   TitleAndSeeAll(
                     seeAllFunction: () {},
-                    sectionTitle: "Latest News",
+                    sectionTitle: "Latest Blogs",
                     hideSeeAll: true,
                   ),
                   SizedBox(
@@ -202,15 +213,18 @@ class HomePage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return const NewsCard();
+                        return const BlogsCard();
                       },
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: CustomButton(
-                      buttonText: "See All News",
-                      buttonMethod: () {},
+                      buttonText: "See All Blogs",
+                      buttonMethod: () =>
+                          Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Blogs(),
+                      )),
                       buttonType: ButtonType.secondary,
                     ),
                   ),

@@ -29,7 +29,7 @@ PreferredSizeWidget myAppBar({
       Builder(
         builder: (context) => InkWell(
           onTap: () => Scaffold.of(context).openDrawer(),
-          child: const ProfileIcon(),
+          child: const ProfileIcon(radius: 15),
         ),
       ),
       CartIcon(cartCount: "99+".toString()),

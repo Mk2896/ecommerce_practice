@@ -3,13 +3,24 @@ import 'package:ecommerce_practice/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
-  Search({Key? key, required this.searchFormKey}) : super(key: key);
+  Search({
+    Key? key,
+    required this.searchFormKey,
+    required this.searchController,
+    required this.labelText,
+    required this.searchMethod,
+  }) : super(key: key);
 
-  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController searchController;
   final GlobalKey<FormState> searchFormKey;
+  final String labelText;
+  final void Function() searchMethod;
 
-  void _search() {
-    if (searchFormKey.currentState!.validate()) {}
+  String? _searchValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please entter some keyword to search";
+    }
+    return null;
   }
 
   @override
@@ -17,10 +28,11 @@ class Search extends StatelessWidget {
     return Form(
       key: searchFormKey,
       child: CustomTextField(
-        labelText: "Search Product Name",
-        textController: _searchController,
+        labelText: labelText,
+        textController: searchController,
+        validationMethod: _searchValidator,
         suffix: IconButton(
-          onPressed: () => _search(),
+          onPressed: searchMethod,
           icon: const Icon(
             Icons.search,
             color: Color(primaryFontColor),

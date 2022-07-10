@@ -1,17 +1,21 @@
 import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/screens/blog_detail.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
-class NewsCard extends StatelessWidget {
-  const NewsCard({Key? key}) : super(key: key);
+class BlogsCard extends StatelessWidget {
+  const BlogsCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.all(0),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const BlogDetail(),
+      )),
       trailing: const Image(
         fit: BoxFit.fill,
-        image: AssetImage("assets/images/news.png"),
+        image: AssetImage("assets/images/blogs.png"),
       ),
       isThreeLine: true,
       minVerticalPadding: 15,

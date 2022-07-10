@@ -3,6 +3,8 @@ import 'package:ecommerce_practice/widgets/back_button.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/custom_text_field.dart';
+import 'package:ecommerce_practice/widgets/google_btn.dart';
+import 'package:ecommerce_practice/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_practice/widgets/extensions.dart';
 
@@ -108,6 +110,18 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ],
                           ),
+                        ),
+                        Center(
+                          child: GoogleButton(
+                            text: "Sign Up With Google",
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            height: 50,
+                          ),
+                        ),
+                        const TextDivider(
+                          text: "OR",
+                          topPadding: verticalPadding,
+                          bottomPadding: verticalPadding,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
