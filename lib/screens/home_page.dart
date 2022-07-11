@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_practice/global_constant.dart';
 import 'package:ecommerce_practice/screens/blogs.dart';
+import 'package:ecommerce_practice/screens/products.dart';
 import 'package:ecommerce_practice/widgets/category_icon.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
 import 'package:ecommerce_practice/widgets/my_app_bar.dart';
@@ -84,7 +83,11 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TitleAndSeeAll(
-                    seeAllFunction: () {},
+                    seeAllFunction: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Products(
+                          screenTitle: "Featured Products", search: () {}),
+                    )),
                     sectionTitle: "Featured Products",
                   ),
                   SizedBox(
@@ -112,7 +115,11 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   TitleAndSeeAll(
-                    seeAllFunction: () {},
+                    seeAllFunction: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          Products(screenTitle: "Best Sellers", search: () {}),
+                    )),
                     sectionTitle: "Best Sellers",
                   ),
                   SizedBox(
@@ -140,7 +147,11 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   TitleAndSeeAll(
-                    seeAllFunction: () {},
+                    seeAllFunction: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          Products(screenTitle: "New Arrivals", search: () {}),
+                    )),
                     sectionTitle: "New Arrivals",
                   ),
                   SizedBox(
@@ -157,7 +168,11 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   TitleAndSeeAll(
-                    seeAllFunction: () {},
+                    seeAllFunction: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Products(
+                          screenTitle: "Top Rated Products", search: () {}),
+                    )),
                     sectionTitle: "Top Rated Products",
                   ),
                   SizedBox(
@@ -174,7 +189,11 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   TitleAndSeeAll(
-                    seeAllFunction: () {},
+                    seeAllFunction: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Products(
+                          screenTitle: "Special Offers", search: () {}),
+                    )),
                     sectionTitle: "Special Offers",
                   ),
                   SizedBox(
