@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_practice/global_constant.dart';
 import 'package:ecommerce_practice/screens/blogs.dart';
+import 'package:ecommerce_practice/screens/categories.dart';
 import 'package:ecommerce_practice/screens/products.dart';
 import 'package:ecommerce_practice/widgets/category_icon.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
@@ -58,7 +59,12 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   TitleAndSeeAll(
-                      seeAllFunction: () {}, sectionTitle: "Categories"),
+                      seeAllFunction: () =>
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Categories(
+                                screenTitle: "All Categories", search: () {}),
+                          )),
+                      sectionTitle: "Categories"),
                   SizedBox(
                     height: 100,
                     width: MediaQuery.of(context).size.width,

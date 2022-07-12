@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:ecommerce_practice/global_constant.dart';
 import 'package:ecommerce_practice/widgets/back_button.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
+import 'package:ecommerce_practice/widgets/custom_image_input.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/custom_text_field.dart';
 import 'package:ecommerce_practice/widgets/google_btn.dart';
 import 'package:ecommerce_practice/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_practice/widgets/extensions.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -24,6 +28,10 @@ class _SignUpState extends State<SignUp> {
   final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
   bool _showPassword = false;
   bool _showConfirmPassword = false;
+
+  File? temporaryImagePath;
+
+  String? errorText = "";
 
   String? _nameValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -62,7 +70,29 @@ class _SignUpState extends State<SignUp> {
     return null;
   }
 
+  Future<void> pickImage(ImageSource source) async {
+    Navigator.pop(context);
+
+    final image = await ImagePicker()
+        .pickImage(source: source, preferredCameraDevice: CameraDevice.front);
+
+    if (image == null) return;
+
+    setState(() {
+      temporaryImagePath = File(image.path);
+    });
+  }
+
   void _signUpMethod() {
+    if (temporaryImagePath == null) {
+      setState(() {
+        errorText = "Profile Picture is required";
+      });
+    } else {
+      setState(() {
+        errorText = null;
+      });
+    }
     if (_signUpFormKey.currentState!.validate()) {}
   }
 
@@ -234,6 +264,28 @@ class _SignUpState extends State<SignUp> {
                                         ),
                                 ),
                                 isPassword: !_showConfirmPassword,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: verticalPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: "Profile Picture",
+                                textColor: Color(primaryFontColor),
+                                textType: TextType.boldText,
+                              ),
+                              const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: verticalPadding)),
+                              CustomImageInput(
+                                errorText: errorText,
+                                pickImageMethod: pickImage,
+                                temporaryImagePath: temporaryImagePath,
                               ),
                             ],
                           ),

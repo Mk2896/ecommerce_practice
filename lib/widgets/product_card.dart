@@ -1,4 +1,5 @@
 import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/screens/product_detail.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
@@ -58,11 +59,16 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CustomText(
-                  text: "TMA-2 HD Wireless",
-                  textColor: Color(primaryFontColor),
-                  textType: TextType.heading3,
-                  overflow: TextOverflow.ellipsis,
+                InkWell(
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ProductDetail(),
+                  )),
+                  child: const CustomText(
+                    text: "TMA-2 HD Wireless",
+                    textColor: Color(primaryFontColor),
+                    textType: TextType.heading3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 const CustomText(
                   text: "Rs. 1.500.000",
