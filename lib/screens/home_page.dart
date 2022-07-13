@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_practice/global_constant.dart';
 import 'package:ecommerce_practice/screens/blogs.dart';
@@ -11,6 +13,7 @@ import 'package:ecommerce_practice/widgets/product_card.dart';
 import 'package:ecommerce_practice/widgets/search.dart';
 import 'package:ecommerce_practice/widgets/side_drawer.dart';
 import 'package:ecommerce_practice/widgets/title_see_all.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

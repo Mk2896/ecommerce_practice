@@ -2,6 +2,7 @@ import 'package:ecommerce_practice/global_constant.dart';
 import 'package:ecommerce_practice/screens/login.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/profile_icon.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -89,6 +90,21 @@ class SideDrawer extends StatelessWidget {
             leading: Icon(Icons.newspaper),
             title: CustomText(
               text: "Blogs",
+              textColor: Color(primaryFontColor),
+              textType: TextType.heading3,
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const Login(),
+              ));
+            },
+            leading: const Icon(Icons.logout),
+            title: const CustomText(
+              text: "Logout",
               textColor: Color(primaryFontColor),
               textType: TextType.heading3,
             ),

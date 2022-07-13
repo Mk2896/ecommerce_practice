@@ -1,12 +1,18 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_practice/global_constant.dart';
+import 'package:ecommerce_practice/models/user.dart';
 import 'package:ecommerce_practice/screens/forget_password.dart';
+import 'package:ecommerce_practice/screens/home_page.dart';
 import 'package:ecommerce_practice/screens/signup.dart';
-import 'package:ecommerce_practice/widgets/back_button.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/custom_text_field.dart';
 import 'package:ecommerce_practice/widgets/google_btn.dart';
+import 'package:ecommerce_practice/widgets/snackbar.dart';
 import 'package:ecommerce_practice/widgets/text_divider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_practice/widgets/extensions.dart';
 
@@ -22,6 +28,18 @@ class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   bool _showPassword = false;
+  User? currentUser;
+  CollectionReference userRef =
+      FirebaseFirestore.instance.collection('users').withConverter<Users>(
+            fromFirestore: (snapshot, _) => Users.fromJson(snapshot.data()!),
+            toFirestore: (user, _) => user.toJson(),
+          );
+
+  @override
+  void initState() {
+    super.initState();
+    currentUser = FirebaseAuth.instance.currentUser;
+  }
 
   String? _emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -42,8 +60,25 @@ class _LoginState extends State<Login> {
     return null;
   }
 
-  void _loginMethod() {
-    if (_loginFormKey.currentState!.validate()) {}
+  void _loginMethod() async {
+    if (_loginFormKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        snackBar("Logged in Successfully", const Color(successColor), context);
+
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ));
+      } on FirebaseAuthException catch (e) {
+        snackBar(e.message, const Color(errorColor), context);
+      } catch (e) {
+        snackBar(e.toString(), const Color(errorColor), context);
+      }
+    }
   }
 
   @override
@@ -56,9 +91,8 @@ class _LoginState extends State<Login> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                backButton(context),
                 Form(
                   key: _loginFormKey,
                   child: Container(
@@ -95,6 +129,7 @@ class _LoginState extends State<Login> {
                             text: "Sign In With Google",
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 50,
+                            successMessage: "Logged In Successfully",
                           ),
                         ),
                         const TextDivider(

@@ -83,7 +83,7 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-  void _signUpMethod() {
+  void _signUpMethod() async {
     if (temporaryImagePath == null) {
       setState(() {
         errorText = "Profile Picture is required";
@@ -146,6 +146,7 @@ class _SignUpState extends State<SignUp> {
                             text: "Sign Up With Google",
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 50,
+                            successMessage: "Registered Successfully",
                           ),
                         ),
                         const TextDivider(

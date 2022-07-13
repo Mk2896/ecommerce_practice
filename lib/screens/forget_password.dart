@@ -3,8 +3,12 @@ import 'package:ecommerce_practice/widgets/back_button.dart';
 import 'package:ecommerce_practice/widgets/custom_button.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
 import 'package:ecommerce_practice/widgets/custom_text_field.dart';
+import 'package:ecommerce_practice/widgets/loading.dart';
+import 'package:ecommerce_practice/widgets/snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_practice/widgets/extensions.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class ForgetPassword extends StatelessWidget {
   ForgetPassword({Key? key}) : super(key: key);
@@ -22,8 +26,21 @@ class ForgetPassword extends StatelessWidget {
     return null;
   }
 
-  void _resetPasswordMethod() {
-    if (_forgetPasswordFormKey.currentState!.validate()) {}
+  void _resetPasswordMethod(BuildContext context) async {
+    if (_forgetPasswordFormKey.currentState!.validate()) {
+      context.loaderOverlay
+          .show(widget: const Loading(loadingText: "Loading.."));
+      try {
+        await FirebaseAuth.instance
+            .sendPasswordResetEmail(email: _emailController.text);
+
+        snackBar("Password Reset Link Sent Successfully",
+            const Color(successColor), context);
+      } catch (e) {
+        snackBar(e.toString(), const Color(errorColor), context);
+      }
+      context.loaderOverlay.hide();
+    }
   }
 
   @override
@@ -88,7 +105,7 @@ class ForgetPassword extends StatelessWidget {
                                 ),
                                 CustomButton(
                                   buttonText: "Send Reset Password Link",
-                                  buttonMethod: _resetPasswordMethod,
+                                  buttonMethod: () => _resetPasswordMethod(context),
                                   buttonType: ButtonType.primary,
                                   topMargin: verticalPadding * 2,
                                 ),

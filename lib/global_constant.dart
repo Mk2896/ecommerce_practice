@@ -1,4 +1,6 @@
 // Theme Colors
+import 'dart:io';
+
 const int primaryColor = 0XFF3669C9;
 const int secondaryColor = 0XFFFFFFFF;
 const int backgroundColor = 0XFFEDEDED;
@@ -20,3 +22,16 @@ const double productCardHeight = 260;
 
 // Password Length
 const int passwordLength = 6;
+
+Future<bool> checkUserConnection() async {
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  } on SocketException catch (_) {
+    return false;
+  }
+}
