@@ -1,8 +1,6 @@
 import 'package:ecommerce_practice/global_constant.dart';
 import 'package:ecommerce_practice/widgets/custom_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleButton extends StatelessWidget {
   const GoogleButton(
